@@ -25,6 +25,8 @@ namespace Kreata.Backend.Repos
 
         public Task UpdateParentAsync(Parent parent)
         {
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.Entry(parent).State = EntityState.Modified;
             throw new NotImplementedException();
         }
     }

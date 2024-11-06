@@ -26,6 +26,8 @@ namespace Kreata.Backend.Repos
 
         public Task UpdateStudentAsync(Student student)
         {
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.Entry(student).State = EntityState.Modified;
             throw new NotImplementedException();
         }
     }

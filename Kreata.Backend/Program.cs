@@ -1,5 +1,7 @@
 using Kreata.Backend.Context;
+using Kreata.Backend.Datas.Entities;
 using Kreata.Backend.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,9 +40,9 @@ app.UseHttpsRedirection();
 
 // Cors
 app.UseCors("KretaCors");
-
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
+
+

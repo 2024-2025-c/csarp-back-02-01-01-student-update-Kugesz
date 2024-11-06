@@ -24,6 +24,8 @@ public class TeacherRepo : ITeacherRepo
 
     public Task UpdateTeacherAsync(Teacher teacher)
     {
+        _dbContext.ChangeTracker.Clear();
+        _dbContext.Entry(teacher).State = EntityState.Modified;
         throw new NotImplementedException();
     }
 }

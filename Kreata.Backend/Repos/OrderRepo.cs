@@ -25,6 +25,8 @@ namespace Kreata.Backend.Repos
 
         public Task UpdateOrderAsync(Order order)
         {
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.Entry(order).State = EntityState.Modified;
             throw new NotImplementedException();
         }
     }
