@@ -6,5 +6,7 @@ namespace Kreata.Backend.Repos
     {
         Task<List<Item>> GetAll();
         Task<Item?> GetBy(Guid Id);
+
+        Task UpdateItemAsync(Item item);
     }
 }

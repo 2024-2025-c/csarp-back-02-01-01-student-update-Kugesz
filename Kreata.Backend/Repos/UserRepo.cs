@@ -22,5 +22,10 @@ namespace Kreata.Backend.Repos
         {
             return await _dbContext.Users.ToListAsync();
         }
+
+        public Task UpdateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

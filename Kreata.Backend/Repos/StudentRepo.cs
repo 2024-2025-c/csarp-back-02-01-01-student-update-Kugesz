@@ -23,5 +23,10 @@ namespace Kreata.Backend.Repos
             int count = _dbContext.Students.Count();
             return await _dbContext.Students.ToListAsync();
         }
+
+        public Task UpdateStudentAsync(Student student)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,4 +21,9 @@ public class TeacherRepo : ITeacherRepo
     {
         return await _dbContext.Teachers.FirstOrDefaultAsync(s => s.Id == id);
     }
+
+    public Task UpdateTeacherAsync(Teacher teacher)
+    {
+        throw new NotImplementedException();
+    }
 }

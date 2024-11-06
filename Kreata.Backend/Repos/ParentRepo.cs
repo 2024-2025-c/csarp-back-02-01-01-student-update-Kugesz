@@ -22,5 +22,10 @@ namespace Kreata.Backend.Repos
         {
             return await _dbContext.Parents.ToListAsync();
         }
+
+        public Task UpdateParentAsync(Parent parent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

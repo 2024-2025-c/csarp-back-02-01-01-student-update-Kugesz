@@ -22,5 +22,10 @@ namespace Kreata.Backend.Repos
         {
             return await _dbContext.Orders.ToListAsync();
         }
+
+        public Task UpdateOrderAsync(Order order)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
