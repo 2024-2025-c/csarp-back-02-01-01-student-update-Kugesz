@@ -23,11 +23,18 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Users.ToListAsync();
         }
 
-        public Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(User user)
         {
             _dbContext.ChangeTracker.Clear();
             _dbContext.Entry(user).State = EntityState.Modified;
-            throw new NotImplementedException();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e);
+            }
         }
     }
 }

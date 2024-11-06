@@ -22,10 +22,17 @@ public class TeacherRepo : ITeacherRepo
         return await _dbContext.Teachers.FirstOrDefaultAsync(s => s.Id == id);
     }
 
-    public Task UpdateTeacherAsync(Teacher teacher)
+    public async Task UpdateTeacherAsync(Teacher teacher)
     {
         _dbContext.ChangeTracker.Clear();
         _dbContext.Entry(teacher).State = EntityState.Modified;
-        throw new NotImplementedException();
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e);
+        }
     }
 }
