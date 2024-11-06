@@ -18,7 +18,7 @@ namespace Kreata.Backend.Datas.Entities
 
         public Student(string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWooman)
         {
-            Id = new Guid();
+            Id = Guid.Empty;
             FirstName = firstName;
             LastName = lastName;
             BirthsDay = birthsDay;
