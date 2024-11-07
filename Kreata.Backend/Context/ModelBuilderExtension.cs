@@ -1,6 +1,7 @@
 ﻿using Kreata.Backend.Datas.Entities;
 using Kreata.Backend.Datas.Enums;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Kreata.Backend.Context
 {
@@ -120,12 +121,18 @@ namespace Kreata.Backend.Context
                 item1,item2
             };
 
+            List<Teacher> teachers = new List<Teacher>
+            {
+                new Teacher("kovacs", "gergo", DateTime.Now, false, false),
+            };
+
             // Students
             modelBuilder.Entity<Student>().HasData(students);
             modelBuilder.Entity<Parent>().HasData(parents);
             modelBuilder.Entity<Order>().HasData(orders);
             modelBuilder.Entity<User>().HasData(users);
             modelBuilder.Entity<Item>().HasData(items);
+            modelBuilder.Entity<Teacher>().HasData(teachers);
         }
     }
 }

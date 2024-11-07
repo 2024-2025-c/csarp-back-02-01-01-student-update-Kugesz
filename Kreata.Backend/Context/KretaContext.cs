@@ -11,6 +11,7 @@ namespace Kreata.Backend.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         public KretaContext(DbContextOptions<KretaContext> options)
             : base(options)
