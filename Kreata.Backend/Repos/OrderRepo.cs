@@ -25,6 +25,7 @@ namespace Kreata.Backend.Repos
 
         public async Task UpdateOrderAsync(Order order)
         {
+            ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
             _dbContext.Entry(order).State = EntityState.Modified;
             try
@@ -33,7 +34,9 @@ namespace Kreata.Backend.Repos
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
+                response.AppendNewError(e.Message);
+                response.AppendNewError($"{nameof(OrderRepo)} osztály, {nameof(UpdateOrderAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{order} frissítése nem sikerült!");
             }
         }
     }

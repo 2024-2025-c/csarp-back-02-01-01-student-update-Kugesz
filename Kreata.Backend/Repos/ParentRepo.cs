@@ -25,6 +25,7 @@ namespace Kreata.Backend.Repos
 
         public async Task UpdateParentAsync(Parent parent)
         {
+            ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
             _dbContext.Entry(parent).State = EntityState.Modified;
             try
@@ -33,7 +34,9 @@ namespace Kreata.Backend.Repos
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
+                response.AppendNewError(e.Message);
+                response.AppendNewError($"{nameof(ParentRepo)} osztály, {nameof(UpdateParentAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{parent} frissítése nem sikerült!");
             }
         }
     }

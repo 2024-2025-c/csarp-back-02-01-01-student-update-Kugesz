@@ -24,6 +24,7 @@ public class TeacherRepo : ITeacherRepo
 
     public async Task UpdateTeacherAsync(Teacher teacher)
     {
+        ControllerResponse response = new ControllerResponse();
         _dbContext.ChangeTracker.Clear();
         _dbContext.Entry(teacher).State = EntityState.Modified;
         try
@@ -32,7 +33,9 @@ public class TeacherRepo : ITeacherRepo
         }
         catch (Exception e)
         {
-            Console.Error.WriteLine(e);
+            response.AppendNewError(e.Message);
+            response.AppendNewError($"{nameof(TeacherRepo)} osztály, {nameof(UpdateTeacherAsync)} metódusban hiba keletkezett");
+            response.AppendNewError($"{teacher} frissítése nem sikerült!");
         }
     }
 }

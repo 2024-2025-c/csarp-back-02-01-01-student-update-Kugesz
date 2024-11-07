@@ -1,26 +1,23 @@
 namespace Kreata.Backend.Datas.Responses;
-
 public class ErrorStore
 {
-    private string _errorMessages;
-
-    public string ErrorMessages
+    public ErrorStore()
     {
-        get => _errorMessages;
-        private set => _errorMessages = value;
+        Error = string.Empty;
     }
 
-    public bool HasError => !string.IsNullOrEmpty(_errorMessages);
-
-    public void AddError(string error)
+    public string Error { get; set; } = string.Empty;
+    public bool HasError => !string.IsNullOrEmpty(Error);
+    public void ClearErrorStore()
     {
-        if (string.IsNullOrEmpty(_errorMessages))
-        {
-            _errorMessages = error;
-        }
-        else
-        {
-            _errorMessages += "\n" + error;
-        }
+        Error = string.Empty;
+    }
+    public void ClearAndAddError(string error)
+    {
+        Error = error;
+    }
+    public void AppendNewError(string error)
+    {
+        Error = $"{Error}\n{error}";
     }
 }

@@ -25,6 +25,7 @@ namespace Kreata.Backend.Repos
 
         public async Task UpdateItemAsync(Item item)
         {
+            ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
             _dbContext.Entry(item).State = EntityState.Modified;
             try
@@ -33,7 +34,9 @@ namespace Kreata.Backend.Repos
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
+                response.AppendNewError(e.Message);
+                response.AppendNewError($"{nameof(ItemRepo)} osztály, {nameof(UpdateItemAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{item} frissítése nem sikerült!");
             }
         }
 
