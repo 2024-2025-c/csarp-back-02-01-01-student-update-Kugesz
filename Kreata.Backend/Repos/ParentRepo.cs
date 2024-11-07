@@ -23,7 +23,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Parents.ToListAsync();
         }
 
-        public async Task UpdateParentAsync(Parent parent)
+        public async Task<ControllerResponse> UpdateParentAsync(Parent parent)
         {
             ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
@@ -38,6 +38,7 @@ namespace Kreata.Backend.Repos
                 response.AppendNewError($"{nameof(ParentRepo)} osztály, {nameof(UpdateParentAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{parent} frissítése nem sikerült!");
             }
+            return response;
         }
     }
 }

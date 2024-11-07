@@ -23,7 +23,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Items.ToListAsync();
         }
 
-        public async Task UpdateItemAsync(Item item)
+        public async Task<ControllerResponse> UpdateItemAsync(Item item)
         {
             ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
@@ -38,8 +38,7 @@ namespace Kreata.Backend.Repos
                 response.AppendNewError($"{nameof(ItemRepo)} osztály, {nameof(UpdateItemAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{item} frissítése nem sikerült!");
             }
+            return response;
         }
-
-
     }
 }

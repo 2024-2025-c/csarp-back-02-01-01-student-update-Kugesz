@@ -22,7 +22,7 @@ public class TeacherRepo : ITeacherRepo
         return await _dbContext.Teachers.FirstOrDefaultAsync(s => s.Id == id);
     }
 
-    public async Task UpdateTeacherAsync(Teacher teacher)
+    public async Task<ControllerResponse> UpdateTeacherAsync(Teacher teacher)
     {
         ControllerResponse response = new ControllerResponse();
         _dbContext.ChangeTracker.Clear();
@@ -37,5 +37,6 @@ public class TeacherRepo : ITeacherRepo
             response.AppendNewError($"{nameof(TeacherRepo)} osztály, {nameof(UpdateTeacherAsync)} metódusban hiba keletkezett");
             response.AppendNewError($"{teacher} frissítése nem sikerült!");
         }
+        return response;
     }
 }

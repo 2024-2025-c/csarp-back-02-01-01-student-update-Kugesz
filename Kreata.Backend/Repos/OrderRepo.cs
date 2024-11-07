@@ -23,7 +23,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Orders.ToListAsync();
         }
 
-        public async Task UpdateOrderAsync(Order order)
+        public async Task<ControllerResponse> UpdateOrderAsync(Order order)
         {
             ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
@@ -38,6 +38,7 @@ namespace Kreata.Backend.Repos
                 response.AppendNewError($"{nameof(OrderRepo)} osztály, {nameof(UpdateOrderAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{order} frissítése nem sikerült!");
             }
+            return response;
         }
     }
 }

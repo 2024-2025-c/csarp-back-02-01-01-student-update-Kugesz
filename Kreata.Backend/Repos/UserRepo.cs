@@ -23,7 +23,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<ControllerResponse> UpdateUserAsync(User user)
         {
             ControllerResponse response = new ControllerResponse();
             _dbContext.ChangeTracker.Clear();
@@ -38,6 +38,7 @@ namespace Kreata.Backend.Repos
                 response.AppendNewError($"{nameof(UserRepo)} osztály, {nameof(UpdateUserAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{user} frissítése nem sikerült!");
             }
+            return response;
         }
     }
 }
