@@ -40,5 +40,25 @@ namespace Kreata.Backend.Controllers
             }
             return BadRequest("Az adatok elérhetetlenek!");
         }
+
+        [HttpPut()]
+        public async Task<ActionResult> UpdateUserAsync(User entity)
+        {
+            ControllerResponse response = new();
+            if (_userRepo is not null)
+            {
+                response = await _userRepo.UpdateUserAsync(entity);
+                if (response.HasError)
+                {
+                    return BadRequest(response);
+                }
+                else
+                {
+                    return Ok(response);
+                }
+            }
+            response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            return BadRequest(response);
+        }
     }
 }
