@@ -1,6 +1,7 @@
 ﻿using Kreata.Backend.Context;
 using Kreata.Backend.Datas.Entities;
 using Microsoft.EntityFrameworkCore;
+using Kreata.Backend.Datas.Responses;
 
 namespace Kreata.Backend.Repos
 {
@@ -23,6 +24,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Items.ToListAsync();
         }
 
+        // Update the repository method to return Task<ControllerResponse>
         public async Task<ControllerResponse> UpdateItemAsync(Item item)
         {
             ControllerResponse response = new ControllerResponse();
@@ -35,8 +37,8 @@ namespace Kreata.Backend.Repos
             catch (Exception e)
             {
                 response.AppendNewError(e.Message);
-                response.AppendNewError($"{nameof(ItemRepo)} osztály, {nameof(UpdateItemAsync)} metódusban hiba keletkezett");
-                response.AppendNewError($"{item} frissítése nem sikerült!");
+                response.AppendNewError($"{nameof(ItemRepo)} class, {nameof(UpdateItemAsync)} method encountered an error");
+                response.AppendNewError($"Failed to update {item}!");
             }
             return response;
         }

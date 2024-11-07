@@ -6,6 +6,6 @@ namespace Kreata.Backend.Repos
     {
         Task<List<Student>> GetAll();
         Task<Student?> GetBy(Guid id);
-        Task UpdateStudentAsync(Student student);
+        Task<ControllerResponse> UpdateStudentAsync(Student student);
     }
 }

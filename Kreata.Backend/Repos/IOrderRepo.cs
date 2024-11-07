@@ -6,6 +6,6 @@ namespace Kreata.Backend.Repos
     {
         Task<List<Order>> GetAll();
         Task<Order?> GetBy(Guid Id);
-        Task UpdateOrderAsync(Order order);
+        Task<ControllerResponse> UpdateOrderAsync(Order order);
     }
 }
