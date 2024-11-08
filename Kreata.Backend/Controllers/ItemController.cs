@@ -1,4 +1,5 @@
 using Kreata.Backend.Datas.Entities;
+using Kreata.Backend.Datas.Responses;
 using Kreata.Backend.Repos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +16,6 @@ namespace Kreata.Backend.Controllers
             _itemRepo = itemRepo;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBy(Guid id)
-        {
-            Item? entity = new();
-            if (_itemRepo is not null)
-            {
-                entity = await _itemRepo.GetBy(id);
-                if (entity != null)
-                    return Ok(entity);
-            }
-            return BadRequest("Az adatok elérhetetlenek!");
-        }
-
         [HttpGet]
         public async Task<IActionResult> SelectAllRecordToListAsync()
         {
@@ -37,6 +25,19 @@ namespace Kreata.Backend.Controllers
             {
                 users = await _itemRepo.GetAll();
                 return Ok(users);
+            }
+            return BadRequest("Az adatok elérhetetlenek!");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBy(Guid id)
+        {
+            Item? entity = new();
+            if (_itemRepo is not null)
+            {
+                entity = await _itemRepo.GetBy(id);
+                if (entity != null)
+                    return Ok(entity);
             }
             return BadRequest("Az adatok elérhetetlenek!");
         }

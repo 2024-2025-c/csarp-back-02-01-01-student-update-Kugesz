@@ -1,4 +1,5 @@
 using Kreata.Backend.Datas.Entities;
+using Kreata.Backend.Datas.Responses;
 using Kreata.Backend.Repos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace Kreata.Backend.Controllers
 
         public ParentController(IParentRepo parentRepo)
         {
-            _parentRepo = parentRepo;
+            _parentRepo = parentRepo ?? throw new ArgumentNullException(nameof(parentRepo)); ;
         }
 
         [HttpGet("{id}")]

@@ -24,7 +24,6 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Items.ToListAsync();
         }
 
-        // Update the repository method to return Task<ControllerResponse>
         public async Task<ControllerResponse> UpdateItemAsync(Item item)
         {
             ControllerResponse response = new ControllerResponse();
