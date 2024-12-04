@@ -60,5 +60,25 @@ namespace Kreata.Backend.Controllers
             response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
             return BadRequest(response);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItemAsync(Guid Id)
+        {
+            ControllerResponse response = new();
+            if(_itemRepo is not null)
+            {
+                response = await _itemRepo.DeleteItemAsync(Id);
+                if (response.HasError)
+                {
+                    return BadRequest(response);
+                }
+                else
+                {
+                    return Ok(response)
+                }
+            }
+            response.ClearAndAddError("Az adat törlése nem lehetséges");
+            return BadRequest(response);
+        }
     }
 }

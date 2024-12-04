@@ -8,5 +8,7 @@ namespace Kreata.Backend.Repos
         Task<Item?> GetBy(Guid Id);
 
         Task<ControllerResponse> UpdateItemAsync(Item item);
+        Task<ControllerResponse> DeleteItemAsync(Guid Id);
+        Task<ControllerResponse> InsertItemAsync(Item item);
     }
 }
