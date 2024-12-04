@@ -7,6 +7,7 @@ namespace Kreata.Backend.Repos
         Task<List<Order>> GetAll();
         Task<Order?> GetBy(Guid Id);
         Task<ControllerResponse> UpdateOrderAsync(Order order);
-        Task<ControllerResponse> DeleteItemAsync(Guid Id);
+        Task<ControllerResponse> DeleteOrderAsync(Guid Id);
+        Task<ControllerResponse> InsertOrderAsync(Order order);
     }
 }
