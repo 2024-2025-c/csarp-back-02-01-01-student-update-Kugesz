@@ -54,25 +54,26 @@ namespace Kreata.Backend.Repos
             else
             {
                 _dbContext.ChangeTracker?.Clear();
-                _dbContext.Entry(parentToDelete).State = EntityState.Deleted;
+                _dbContext.Entry(studentToDelete).State = EntityState.Deleted;
                 await _dbContext.SaveChangesAsync();
             }
             return response;
         }
 
-        public async Task<ControllerResponse> InsertStudentAsyn(Parent parent)
+        public async Task<ControllerResponse> InsertStudentAsync(Student student)
         {
+                ControllerResponse response = new ControllerResponse();
             try
             {
-                _dbcontext.add(parent);
-                await _dbContext.SaveChangesAsync()
+                _dbContext.Add(student);
+                await _dbContext.SaveChangesAsync();
                     }
             catch
             {
-                ControllerResponse response = new ControllerResponse();
-                response.AppendNewError($"{parent.Name} nem hozzaadható!");
-                response.AppendNewError("A hozzáadás nem lehetséges!")
+                response.AppendNewError($"{student} nem hozzaadható!");
+                response.AppendNewError("A hozzáadás nem lehetséges!");
             }
+            return response;
         }
     }
 }

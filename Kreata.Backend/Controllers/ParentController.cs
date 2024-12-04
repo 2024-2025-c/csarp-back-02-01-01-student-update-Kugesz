@@ -62,26 +62,6 @@ namespace Kreata.Backend.Controllers
             return BadRequest(response);
         }
 
-        [HttpPut()]
-        public async Task<ActionResult> UpdateParentAsync(Parent entity)
-        {
-            ControllerResponse response = new();
-            if (_parentRepo is not null)
-            {
-                response = await _parentRepo.UpdateParentAsync(entity);
-                if (response.HasError)
-                {
-                    return BadRequest(response);
-                }
-                else
-                {
-                    return Ok(response);
-                }
-            }
-            response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
-            return BadRequest(response);
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParentAsync(Guid Id)
         {
@@ -95,7 +75,7 @@ namespace Kreata.Backend.Controllers
                 }
                 else
                 {
-                    return Ok(response)
+                    return Ok(response);
                 }
             }
             response.ClearAndAddError("Az adat törlése nem lehetséges");

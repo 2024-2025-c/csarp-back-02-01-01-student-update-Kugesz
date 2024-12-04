@@ -75,7 +75,7 @@ namespace Kreata.Backend.Controllers
                 }
                 else
                 {
-                    return Ok(response)
+                    return Ok(response);
                 }
             }
             response.ClearAndAddError("Az adat törlése nem lehetséges");

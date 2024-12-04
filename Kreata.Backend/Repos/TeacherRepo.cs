@@ -43,7 +43,7 @@ public class TeacherRepo : ITeacherRepo
     public async Task<ControllerResponse> DeleteTeacherAsync(Guid Id)
     {
         ControllerResponse response = new ControllerResponse();
-        Teachers? teacherToDelete = await GetBy(Id);
+        Teacher? teacherToDelete = await GetBy(Id);
         if (teacherToDelete != null || teacherToDelete == default)
         {
             response.AppendNewError($"{Id} idevel rendelkezo Teacher nem talalható!");
@@ -58,18 +58,19 @@ public class TeacherRepo : ITeacherRepo
         return response;
     }
 
-    public async Task<ControllerResponse> InsertTeacherAsyn(Teacher teacher)
+    public async Task<ControllerResponse> InsertTeacherAsync(Teacher teacher)
     {
+            ControllerResponse response = new ControllerResponse();
         try
         {
-            _dbcontext.add(teacher);
-            await _dbContext.SaveChangesAsync()
+            _dbContext.Add(teacher);
+            await _dbContext.SaveChangesAsync();
             }
         catch
         {
-            ControllerResponse response = new ControllerResponse();
-            response.AppendNewError($"{teacher.Name} nem hozzaadható!");
-            response.AppendNewError("A hozzáadás nem lehetséges!")
+            response.AppendNewError($"{teacher} nem hozzaadható!");
+            response.AppendNewError("A hozzáadás nem lehetséges!");
             }
+        return response;
     }
 }

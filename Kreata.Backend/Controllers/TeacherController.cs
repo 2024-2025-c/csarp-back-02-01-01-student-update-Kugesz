@@ -60,26 +60,6 @@ public class TeacherController : ControllerBase
         return BadRequest(response);
     }
 
-    [HttpPut()]
-    public async Task<ActionResult> UpdateTeacherAsync(Teacher entity)
-    {
-        ControllerResponse response = new();
-        if (_teacherRepo is not null)
-        {
-            response = await _teacherRepo.UpdateTeacherAsync(entity);
-            if (response.HasError)
-            {
-                return BadRequest(response);
-            }
-            else
-            {
-                return Ok(response);
-            }
-        }
-        response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
-        return BadRequest(response);
-    }
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTeacherAsync(Guid Id)
     {
@@ -93,7 +73,7 @@ public class TeacherController : ControllerBase
             }
             else
             {
-                return Ok(response)
+                return Ok(response);
                 }
         }
         response.ClearAndAddError("Az adat törlése nem lehetséges");

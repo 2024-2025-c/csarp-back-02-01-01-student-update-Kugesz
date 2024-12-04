@@ -59,19 +59,21 @@ namespace Kreata.Backend.Repos
             return response;
         }
 
-        public async Task<ControllerResponse> InsertOrderAsyn(Order order)
+        public async Task<ControllerResponse> InsertOrderAsync(Order order)
         {
+                ControllerResponse response = new ControllerResponse();
             try
             {
-                _dbcontext.add(order);
-                await _dbContext.SaveChangesAsync()
+                _dbContext.Add(order);
+                await _dbContext.SaveChangesAsync();
             }
             catch
             {
-                ControllerResponse response = new ControllerResponse();
-                response.AppendNewError($"{order.Name} nem hozzaadható!");
-                response.AppendNewError("A hozzáadás nem lehetséges!")
+                response.AppendNewError($"{order} nem hozzaadható!");
+                response.AppendNewError("A hozzáadás nem lehetséges!");
             }
+            return response;
+        }
         }
     }
-}
+
