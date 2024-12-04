@@ -39,4 +39,37 @@ public class TeacherRepo : ITeacherRepo
         }
         return response;
     }
+
+    public async Task<ControllerResponse> DeleteTeacherAsync(Guid Id)
+    {
+        ControllerResponse response = new ControllerResponse();
+        Teachers? teacherToDelete = await GetBy(Id);
+        if (teacherToDelete != null || teacherToDelete == default)
+        {
+            response.AppendNewError($"{Id} idevel rendelkezo Teacher nem talalható!");
+            response.AppendNewError("Item törlése nem sikerült!");
+        }
+        else
+        {
+            _dbContext.ChangeTracker?.Clear();
+            _dbContext.Entry(teacherToDelete).State = EntityState.Deleted;
+            await _dbContext.SaveChangesAsync();
+        }
+        return response;
+    }
+
+    public async Task<ControllerResponse> InsertTeacherAsyn(Teacher teacher)
+    {
+        try
+        {
+            _dbcontext.add(teacher);
+            await _dbContext.SaveChangesAsync()
+            }
+        catch
+        {
+            ControllerResponse response = new ControllerResponse();
+            response.AppendNewError($"{teacher.Name} nem hozzaadható!");
+            response.AppendNewError("A hozzáadás nem lehetséges!")
+            }
+    }
 }
