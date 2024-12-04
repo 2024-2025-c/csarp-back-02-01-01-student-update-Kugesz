@@ -7,6 +7,7 @@ namespace Kreata.Backend.Repos
         Task<List<User>> GetAll();
         Task<User?> GetBy(Guid Id);
         Task<ControllerResponse> UpdateUserAsync(User user);
-        Task<ControllerResponse> DeleteItemAsync(Guid Id);
+        Task<ControllerResponse> DeleteUserAsync(Guid Id);
+        Task<ControllerResponse> InsertUserAsync(User user);
     }
 }

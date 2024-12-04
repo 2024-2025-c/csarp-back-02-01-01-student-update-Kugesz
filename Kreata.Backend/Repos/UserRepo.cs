@@ -40,5 +40,38 @@ namespace Kreata.Backend.Repos
             }
             return response;
         }
+
+        public async Task<ControllerResponse> DeleteUserAsync(Guid Id)
+        {
+            ControllerResponse response = new ControllerResponse();
+            User? userToDelete = await GetBy(Id);
+            if (userToDelete != null || userToDelete == default)
+            {
+                response.AppendNewError($"{Id} idevel rendelkezo User nem talalható!");
+                response.AppendNewError("Item törlése nem sikerült!");
+            }
+            else
+            {
+                _dbContext.ChangeTracker?.Clear();
+                _dbContext.Entry(userToDelete).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            return response;
+        }
+
+        public async Task<ControllerResponse> InsertUserAsyn(User user)
+        {
+            try
+            {
+                _dbcontext.add(user);
+                await _dbContext.SaveChangesAsync()
+            }
+            catch
+            {
+                ControllerResponse response = new ControllerResponse();
+                response.AppendNewError($"{user.Name} nem hozzaadható!");
+                response.AppendNewError("A hozzáadás nem lehetséges!")
+            }
+        }
     }
 }
