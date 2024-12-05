@@ -42,6 +42,26 @@ namespace Kreata.Backend.Controllers
             return BadRequest("Az adatok elérhetetlenek!");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItemAsync(Guid Id)
+        {
+            ControllerResponse response = new();
+            if (_itemRepo is not null)
+            {
+                response = await _itemRepo.DeleteItemAsync(Id);
+                if (response.HasError)
+                {
+                    return BadRequest(response);
+                }
+                else
+                {
+                    return Ok(response);
+                }
+            }
+            response.ClearAndAddError("Az adat törlése nem lehetséges");
+            return BadRequest(response);
+        }
+
         [HttpPut()]
         public async Task<ActionResult> UpdateItemAsync(Item entity)
         {
@@ -62,23 +82,25 @@ namespace Kreata.Backend.Controllers
             return BadRequest(response);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteItemAsync(Guid Id)
+       
+
+        [HttpPost()]
+        public async Task<IActionResult> InsertItemAsync(Item item)
         {
             ControllerResponse response = new();
-            if(_itemRepo is not null)
+            if (_itemRepo is not null)
             {
-                response = await _itemRepo.DeleteItemAsync(Id);
+                response = await _itemRepo.InsertItemAsync(item);
                 if (response.HasError)
                 {
-                    return BadRequest(response);
+                    Console.WriteLine(response.Error);
                 }
                 else
                 {
                     return Ok(response);
                 }
             }
-            response.ClearAndAddError("Az adat törlése nem lehetséges");
+            response.ClearAndAddError("Az adatok hozzáadása nem lehetséges!");
             return BadRequest(response);
         }
     }

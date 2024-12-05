@@ -79,4 +79,24 @@ public class TeacherController : ControllerBase
         response.ClearAndAddError("Az adat törlése nem lehetséges");
         return BadRequest(response);
     }
+
+    [HttpPost()]
+    public async Task<IActionResult> InsertTeacherAsync(Teacher teacher)
+    {
+        ControllerResponse response = new();
+        if (_teacherRepo is not null)
+        {
+            response = await _teacherRepo.InsertTeacherAsync(teacher);
+            if (response.HasError)
+            {
+                Console.WriteLine(response.Error);
+            }
+            else
+            {
+                return Ok(response);
+            }
+        }
+        response.ClearAndAddError("Az adatok hozzáadása nem lehetséges!");
+        return BadRequest(response);
+    }
 }

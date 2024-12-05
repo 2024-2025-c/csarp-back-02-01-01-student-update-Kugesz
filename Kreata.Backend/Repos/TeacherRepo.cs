@@ -44,7 +44,7 @@ public class TeacherRepo : ITeacherRepo
     {
         ControllerResponse response = new ControllerResponse();
         Teacher? teacherToDelete = await GetBy(Id);
-        if (teacherToDelete != null || teacherToDelete == default)
+        if (teacherToDelete == null || teacherToDelete == default)
         {
             response.AppendNewError($"{Id} idevel rendelkezo Teacher nem talalható!");
             response.AppendNewError("Item törlése nem sikerült!");

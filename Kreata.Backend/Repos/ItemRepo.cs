@@ -46,7 +46,7 @@ namespace Kreata.Backend.Repos
         {
             ControllerResponse response = new ControllerResponse();
             Item? itemToDelete = await GetBy(Id);
-            if (itemToDelete != null || itemToDelete == default) {
+            if (itemToDelete == null || itemToDelete == default) {
                 response.AppendNewError($"{Id} idevel rendelkezo Item nem talalható!");
                 response.AppendNewError("Item törlése nem sikerült!");
             }
