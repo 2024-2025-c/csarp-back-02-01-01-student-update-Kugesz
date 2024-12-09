@@ -45,7 +45,7 @@ namespace Kreata.Backend.Repos
         {
             ControllerResponse response = new ControllerResponse();
             Parent? parentToDelete = await GetBy(Id);
-            if (parentToDelete != null || parentToDelete == default)
+            if (parentToDelete == null)
             {
                 response.AppendNewError($"{Id} idevel rendelkezo Parent nem talalható!");
                 response.AppendNewError("Item törlése nem sikerült!");

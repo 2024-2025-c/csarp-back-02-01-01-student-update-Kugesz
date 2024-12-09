@@ -46,7 +46,7 @@ namespace Kreata.Backend.Repos
         {
             ControllerResponse response = new ControllerResponse();
             Student? studentToDelete = await GetBy(Id);
-            if (studentToDelete != null || studentToDelete == default)
+            if (studentToDelete == null)
             {
                 response.AppendNewError($"{Id} idevel rendelkezo Student nem talalható!");
                 response.AppendNewError("Item törlése nem sikerült!");

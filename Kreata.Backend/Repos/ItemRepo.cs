@@ -42,19 +42,29 @@ namespace Kreata.Backend.Repos
             return response;
         }
 
-        public async Task<ControllerResponse> DeleteItemAsync(Guid Id)
+        public async Task<ControllerResponse> DeleteItemAsync(Guid id)
         {
             ControllerResponse response = new ControllerResponse();
-            Item? itemToDelete = await GetBy(Id);
-            if (itemToDelete != null || itemToDelete == default) {
-                response.AppendNewError($"{Id} idevel rendelkezo Item nem talalható!");
-                response.AppendNewError("Item törlése nem sikerült!");
+            Item? itemToDelete = await GetBy(id);
+            if (itemToDelete == null)
+            {
+                response.AppendNewError($"Item with Id {id} not found!");
+                response.AppendNewError("Failed to delete item!");
             }
             else
             {
-                _dbContext.ChangeTracker?.Clear();
+                _dbContext.ChangeTracker.Clear();
                 _dbContext.Entry(itemToDelete).State = EntityState.Deleted;
-                await _dbContext.SaveChangesAsync();
+                try
+                {
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    response.AppendNewError(e.Message);
+                    response.AppendNewError($"{nameof(ItemRepo)} class, {nameof(DeleteItemAsync)} method encountered an error");
+                    response.AppendNewError($"Failed to delete {itemToDelete}!");
+                }
             }
             return response;
         }

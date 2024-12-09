@@ -45,7 +45,7 @@ namespace Kreata.Backend.Repos
         {
             ControllerResponse response = new ControllerResponse();
             Order? orderToDelete = await GetBy(Id);
-            if (orderToDelete != null || orderToDelete == default)
+            if (orderToDelete == null)
             {
                 response.AppendNewError($"{Id} idevel rendelkezo Order nem talalható!");
                 response.AppendNewError("Item törlése nem sikerült!");
